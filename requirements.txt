@@ -1,0 +1,12 @@
+json
+langdetect
+regex
+pytz
+hashlib
+pymongo
+bson
+logging
+urllib3
+argostranslate
+telethon
+asyncio

@@ -1,0 +1,7 @@
+{
+    "telegram_api_id": "YOUR_API_ID",
+    "telegram_api_hash": "YOUR_API_HASH",
+    "mongo_uri": "mongodb://localhost:27017/",
+    "download_media": true,
+    "channel_crawl_first": true
+  }
