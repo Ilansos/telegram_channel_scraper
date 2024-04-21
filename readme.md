@@ -107,3 +107,9 @@ This can be especially helpful for debugging issues or monitoring the scraper's 
 ## Support
 
 For any issues or questions regarding the setup or operation of the scraper, please raise an issue in the repository or contact the repository maintainers.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+### MIT License
