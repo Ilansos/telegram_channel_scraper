@@ -78,10 +78,10 @@ channel_crawl_first: Set to true to only process the first message of each chann
 
 ### 6. Install Translation Languages
 
-Run the language_installer.py script to install the necessary languages for the translation library:
+Run the translator_install.py script to install the necessary languages for the translation library:
 
 ```bash
-python language_installer.py
+python translator_install.py
 ```
 
 This script downloads and installs translation packages needed to convert content to English from various languages.
