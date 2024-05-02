@@ -1,7 +1,19 @@
 # Telegram Channel Scraper Setup Guide
 
 This guide provides instructions on how to set up and use the Telegram scraper script which collects data from Telegram channels.
-Prerequisites
+
+## Overview
+
+The Telegram Channel Scraper is a Python-based tool that extracts information from specified Telegram channels and stores it in a MongoDB database. It collects details about the channels, including:
+
+    Channel Details: Name, ID, description, URLs in the description, and subscriber count.
+    Messages: Information about each message, including the sender's ID and username, content, URLs in the content, replies, and any attached media.
+    Replies: Information about replies to messages, including the sender's ID and username, content, URLs in the content, and attached media.
+
+The scraper also provides options to download media files attached to messages and replies.
+
+
+## Prerequisites
 
     Python 3.6 or higher
     MongoDB server
@@ -11,7 +23,7 @@ Prerequisites
 
 First, clone this repository to your local machine using git:
 
-```
+```bash
 git clone https://github.com/Ilansos/telegram_channel_scraper.git
 cd <repository-directory>
 ```
@@ -20,7 +32,7 @@ cd <repository-directory>
 
 Install the required Python packages using pip:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
@@ -45,7 +57,7 @@ To use the Telegram API, you need an API ID and hash. Follow these steps to obta
 
 Modify the config.json file that is located in the root directory the project with the following configuration parameters:
 
-```
+```bash
 {
   "telegram_api_id": "YOUR_API_ID",
   "telegram_api_hash": "YOUR_API_HASH",
@@ -68,24 +80,60 @@ channel_crawl_first: Set to true to only process the first message of each chann
 
 Run the language_installer.py script to install the necessary languages for the translation library:
 
-```
+```bash
 python language_installer.py
 ```
 
 This script downloads and installs translation packages needed to convert content to English from various languages.
 
-### 7. Running the Scraper
+### 7. Usage Details
+
+The script telegram_scraper.py reads the channel usernames and keywords from channel_list.txt and keywords.txt, respectively. Ensure that these files are formatted as one entry per line.
+
+### 8. Running the Scraper
 
 To run the Telegram scraper, use the following command:
 
-```
+```bash
 python telegram_channel_scraper.py
 ```
 
 Make sure that all configuration files such as keywords.txt, channel_list.txt, and config.json are correctly set up and present in the directory from which you run the script.
-Usage Details
 
-The script telegram_scraper.py reads the channel usernames and keywords from channel_list.txt and keywords.txt, respectively. Ensure that these files are formatted as one entry per line.
+
+### 9. Database Structure
+
+The scraper stores data in a MongoDB database, organized as follows:
+
+    Database Name: tg_scrapers
+
+    Collections:
+
+        channel_main_info: Contains documents representing each Telegram channel, with fields such as:
+            channel_username
+            channel_name
+            channel_id
+            description
+            description_in_english
+            urls_in_description
+            amount_of_subscribers
+            channel_url
+            daily, weekly, monthly, total counts of posts
+            last_updated
+
+        channels_messages: Contains documents representing each message, with fields such as:
+            channel_information (including channel username, name, ID, and URL)
+            message_id
+            sender and sender_id
+            content and content_in_english
+            urls_in_content
+            post_type
+            post_number
+            date_posted and views
+            attachments
+            replies (list of reply documents)
+            date_scraped and date_scraped_unix_time
+            hash
 
 ## Logging System
 
@@ -98,7 +146,7 @@ The scraper uses Python's logging module to log various events such as errors, w
 
 To view the logs, you can open the telegram_scraper.log file in any text editor or tail it in a console window:
 
-```
+```bash
 tail -f telegram_scraper.log
 ```
 
